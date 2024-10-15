@@ -1,0 +1,13 @@
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "courses": {
+      ".indexOn": ["instructorId"],
+      "$courseId": {
+        ".read": true,
+        ".write": "auth != null && (!data.exists() || data.child('instructorId').val() === auth.uid)"
+      }
+    }
+  }
+}
